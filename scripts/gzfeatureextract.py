@@ -7,7 +7,7 @@ def gzfeat_ext(longitude,latitude,elevation):
     from haversine import haversine #from haversine.py within repository
     
     #Calculating Horizontal Distance of the subtrack 
-    x = haversine(latitude, longitude) #Horizontal distance along track
+    x = haversine(latitude[:], longitude[:],latitude[0],latitude[0]) #Horizontal distance along track
     y = elevation #Land ice elevation along track
     
     def find_primary_extrema(x, y):
