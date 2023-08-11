@@ -17,7 +17,7 @@ Our team is interested in estimating the length scales of grounding zone depress
 * `environment.yml`
 <br> `conda` environment description needed to run this project.
 * `README.md`
-<br> Description of the project. [Sample](https://geohackweek.github.io/wiki/github_project_management.html#project-guidelines)
+<br> Description of the project. 
 
 ## Folders
 
