@@ -26,34 +26,33 @@ def gzfeat_ext(longitude,latitude,elevation):
         
             # Check if we have a single minima and maxima
             if len(minima_indices) == 1 and len(maxima_indices) == 1 and minima_indices[0] < maxima_indices[0]:
-                minima_position = distance[minima_indices[0]]
-                minima_height = height[minima_indices[0]]
-                maxima_position = distance[maxima_indices[0]]
-                maxima_height = height[maxima_indices[0]]
+                min_ind = minima_indices
+                max_ind = maxima_indices
             
-                distance_between_ = distance[maxima_indices[0]]-distance[minima_indices[0]]
-            
-                return (minima_position, maxima_position, minima_height, maxima_height, distance_between_, order)
+                return (min_ind,max_ind, order)
         
             order += 1
 
     # If we exit the loop without a return, it means we couldn't find suitable extrema
-        return None
+        return 0
+    
+    indices = find_primary_extrema(x,y) #min:0, max:1, order: 2
+
+    ele_min = y[indices[0]] #Trough of Feature
+    ele_max = y[indices[1]] #Peak of Feature
+    
+    lat_min =  latitude[indices[0]]#Latitude at Trough 
+    lat_max =  latitude[indices[1]]#Latitude at Peak
+    
+    lon_min =  longitude[indices[0]]#Longitude at Trough 
+    lon_max =  longitude[indices[1]]#Longitude at Peak
     
     
-    ele_min =  #Trough of Feature
-    ele_max =  #Peak of Feature
+    dist_min =  x[indices[0]]#Distance along Track at Trough
+    dist_max = x[indices[1]] #Distance along Track at Peak
     
-    lat_min =  #Latitude at Trough 
-    lat_max =  #Latitude at Peak
-    
-    lon_min =  #Longitude at Trough 
-    lon_max =  #Longitude at Peak
-    
-    
-    dist_min =  #Distance along Track at Trough
-    dist_max =  #Distance along Track at Peak
-    
-    wavelength = [] # Wavelength of Each Feature 
-    midpoint = [] #Midpoint of Each Feature
+    wavelength = 2*(dist_max-dist_min)# Wavelength of Each Feature 
+    midpoint = (ele_min+ele_max)/2 #Midpoint of Each Feature
+
+    return(ele_min, ele_max, lat_min, lat_max, lon_min, lon_max, dist_min, dist_max, wavelength, midpoint)
     
